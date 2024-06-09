@@ -26,7 +26,11 @@ func New(adress string, s *chat.Service) *Transport {
 	}
 }
 
-func (t *Transport) Start() error {
+func (t *Transport) Start(enableTLS bool, certFile, keyFile string) error {
 	go t.router.ListenWebsocket()
-	return t.Server.ListenAndServe()
+	if enableTLS {
+		return t.Server.ListenAndServeTLS(certFile, keyFile)
+	} else {
+		return t.Server.ListenAndServe()
+	}
 }

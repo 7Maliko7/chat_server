@@ -25,7 +25,7 @@ func main() {
 		transport := http.New(cfg.HttpPort, chatService)
 		wg.Add(1)
 		go func() {
-			err := transport.Start()
+			err := transport.Start(cfg.EnableTLS, cfg.CertFile, cfg.KeyFile)
 			if err != nil {
 				log.Fatal(err)
 			}
