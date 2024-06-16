@@ -9,6 +9,6 @@ import (
 var TransportTest *Transport
 
 func TestTransport(t *testing.T) {
-	ChatService := chat.New()
+	ChatService := chat.New("token")
 	TransportTest = New("tcp", "8081", ChatService)
 }

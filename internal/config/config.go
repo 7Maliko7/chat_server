@@ -17,6 +17,7 @@ type Config struct {
 	EnableTLS bool   `env:"ENABLE_TLS"`
 	CertFile  string `env:"CERT_FILE"`
 	KeyFile   string `env:"KEY_FILE"`
+	AuthToken string `env:"AUTH_TOKEN"`
 }
 
 func New(path string) (*Config, error) {

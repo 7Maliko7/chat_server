@@ -11,7 +11,7 @@ import (
 var ChatService *Service
 
 func TestService(t *testing.T) {
-	ChatService = New()
+	ChatService = New("token")
 }
 
 func TestConnectChat(t *testing.T) {
@@ -19,7 +19,7 @@ func TestConnectChat(t *testing.T) {
 	ch := make(chan message.Model)
 	cl := client.New(conn, ch, "John", "tcp")
 
-	err := ChatService.ConnectChat(cl)
+	err := ChatService.ConnectChat(cl, "123")
 	if err != nil {
 		t.Error(err)
 	}

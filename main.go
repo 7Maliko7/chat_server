@@ -17,7 +17,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	chatService := chat.New()
+	chatService := chat.New(cfg.AuthToken)
 
 	wg := sync.WaitGroup{}
 

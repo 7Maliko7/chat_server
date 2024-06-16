@@ -4,17 +4,23 @@ import (
 	"fmt"
 
 	"github.com/7Maliko7/chat_server/internal/model/client"
+	"github.com/7Maliko7/chat_server/pkg/errors"
 )
 
 type Service struct {
-	Conns map[string]*client.Model
+	Conns     map[string]*client.Model
+	AuthToken string
 }
 
-func New() *Service {
-	return &Service{Conns: make(map[string]*client.Model)}
+func New(AuthToken string) *Service {
+	return &Service{Conns: make(map[string]*client.Model), AuthToken: AuthToken}
 }
 
-func (c *Service) ConnectChat(cl *client.Model) error {
+func (c *Service) ConnectChat(cl *client.Model, AuthToken string) error {
+	if c.AuthToken != AuthToken {
+		fmt.Printf("Invalid AuthToken")
+		return errors.ErrInvalidAuthToken
+	}
 	c.Conns[cl.Name] = cl
 	fmt.Printf("%s connected\n", cl.Name)
 	go cl.Listen()
