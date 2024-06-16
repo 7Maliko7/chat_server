@@ -8,16 +8,22 @@ import (
 )
 
 type Config struct {
-	HttpPort  string `env:"HTTP_PORT"`
-	TcpPort   string `env:"TCP_PORT"`
-	UdpPort   string `env:"UDP_PORT"`
-	UseHttp   bool   `env:"USE_HTTP"`
-	UseTcp    bool   `env:"USE_TCP"`
-	UseUdp    bool   `env:"USE_UDP"`
-	EnableTLS bool   `env:"ENABLE_TLS"`
-	CertFile  string `env:"CERT_FILE"`
-	KeyFile   string `env:"KEY_FILE"`
-	AuthToken string `env:"AUTH_TOKEN"`
+	HttpPort  string    `env:"HTTP_PORT"`
+	TcpPort   string    `env:"TCP_PORT"`
+	UdpPort   string    `env:"UDP_PORT"`
+	UseHttp   bool      `env:"USE_HTTP"`
+	UseTcp    bool      `env:"USE_TCP"`
+	UseUdp    bool      `env:"USE_UDP"`
+	EnableTLS bool      `env:"ENABLE_TLS"`
+	CertFile  string    `env:"CERT_FILE"`
+	KeyFile   string    `env:"KEY_FILE"`
+	AuthToken string    `env:"AUTH_TOKEN"`
+	Log       LogConfig `env:",prefix=LOG_"`
+}
+
+type LogConfig struct {
+	Driver string `env:"DRIVER"`
+	Level  string `env:"LEVEL"`
 }
 
 func New(path string) (*Config, error) {
